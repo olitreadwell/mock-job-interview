@@ -21,19 +21,19 @@ app.get('/pres', function(req, res) {
       return res.sendStatus(500);
     }
 
-    var wordArr = wordTxt.split("\n");
-    var imgArr = fs.readdirSync(imgPath);
+    var wordArr = shuffleArray(wordTxt.split("\n"));
+    var imgArr = shuffleArray(fs.readdirSync(imgPath));
     var slides = ['Hello.'];
     var numSlides = 10 + Math.random()*6;
 
     for (var i=0; i<numSlides; i++) {
 
       if (Math.random() < 0.3) {
-        var word = wordArr[Math.floor(Math.random()*wordArr.length)];
+        var word = wordArr.pop();;
         slides.push(word.charAt(0).toUpperCase() + word.slice(1));
       }
       else {
-        slides.push('<img style="height: 50%" src="/img/' + imgArr[Math.floor(Math.random()*imgArr.length)]+'">');
+        slides.push('<img src="/img/' + imgArr.pop()+'">');
       }
     }
 
@@ -50,3 +50,14 @@ app.use(function(req, res) {
 app.listen(port, function() {
   console.log('Listening on port',port);
 });
+
+
+function shuffleArray(arr) {
+    for (var i=arr.length-1; i>0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    return arr;
+}
