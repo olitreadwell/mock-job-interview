@@ -7,6 +7,12 @@ var port = process.env.PORT || 3000;
 
 var wordPath = path.join(__dirname, 'data/words.txt');
 var imgPath = path.join(__dirname, 'public/img');
+var greetings = shuffleArray([
+  'hello', 'welcome', 'hi', 'hello', 'welcome', 'question:'
+]);
+var goodbye = shuffleArray([
+  'goodbye', 'the end', 'fin', 'thank you', 'thanks', 'thank you.'
+]);
 
 app.disable('x-powered-by');
 
@@ -23,22 +29,22 @@ app.get('/pres', function(req, res) {
 
     var wordArr = shuffleArray(wordTxt.split("\n"));
     var imgArr = shuffleArray(fs.readdirSync(imgPath));
-    var slides = ['Hello.'];
+    var title = capFirst(wordArr.pop());
+    var slides = [capFirst(greetings.pop())];
     var numSlides = 10 + Math.random()*6;
 
     for (var i=0; i<numSlides; i++) {
 
       if (Math.random() < 0.3) {
-        var word = wordArr.pop();;
-        slides.push(word.charAt(0).toUpperCase() + word.slice(1));
+        slides.push(capFirst(wordArr.pop()));
       }
       else {
         slides.push('<img src="/img/' + imgArr.pop()+'">');
       }
     }
 
-    slides.push('Thank you.');
-    res.render('deck', {slides: slides});
+    slides.push(capFirst(goodbye.pop()));
+    res.render('deck', {slides: slides, title: title});
   });
 });
 
@@ -51,6 +57,11 @@ app.listen(port, function() {
   console.log('Listening on port',port);
 });
 
+function capFirst(str) {
+  var words = str.split(' ');
+  words = words.map(function(s) { return s.charAt(0).toUpperCase() + s.slice(1) });
+  return words.join(' ');
+}
 
 function shuffleArray(arr) {
     for (var i=arr.length-1; i>0; i--) {
