@@ -7,6 +7,19 @@ var port = process.env.PORT || 3000;
 
 var wordPath = path.join(__dirname, 'data/words.txt');
 var imgPath = path.join(__dirname, 'public/img');
+var readWords = [];
+var wordArray = [];
+
+fs.readFile(wordPath, 'utf8', function(err, wordTxt) {
+  if (err) {
+    console.error(err.stack);
+    return res.sendStatus(500);
+  }
+  readWords = wordTxt.split("\n").filter(function(s){return s.match(/[a-z]/i)});
+  wordArray = initWords();
+});
+
+var imgArray = initImages();
 var greetings = shuffleArray([
   'hello', 'welcome', 'hi', 'hello', 'welcome', 'question:'
 ]);
@@ -15,38 +28,29 @@ var goodbye = shuffleArray([
 ]);
 
 app.disable('x-powered-by');
-
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 app.get('/pres', function(req, res) {
 
-  fs.readFile(wordPath, 'utf8', function(err, wordTxt) {
-    if (err) {
-      console.error(err.stack);
-      return res.sendStatus(500);
+  var title = getWord();
+  var slides = [getGreeting()];
+  var numSlides = 10 + Math.random()*6;
+
+  for (var i=0; i<numSlides; i++) {
+
+    if (Math.random() < 0.3) {
+      slides.push(getWord());
     }
-
-    var wordArr = shuffleArray(wordTxt.split("\n"));
-    var imgArr = shuffleArray(fs.readdirSync(imgPath));
-    var title = capFirst(wordArr.pop());
-    var slides = [capFirst(greetings.pop())];
-    var numSlides = 10 + Math.random()*6;
-
-    for (var i=0; i<numSlides; i++) {
-
-      if (Math.random() < 0.3) {
-        slides.push(capFirst(wordArr.pop()));
-      }
-      else {
-        slides.push('<img src="/img/' + imgArr.pop()+'">');
-      }
+    else {
+      slides.push('<img src="/img/' + getImg() +'">');
     }
+  }
 
-    slides.push(capFirst(goodbye.pop()));
-    slides.push('<a class="restart" href="/pres">New Randomized Presentation</a>');
-    res.render('deck', {slides: slides, title: title});
-  });
+  slides.push(getGoodbye());
+  slides.push('<a class="restart" href="/pres">New Randomized Presentation</a>');
+  res.render('deck', {slides: slides, title: title});
+
 });
 
 
@@ -58,10 +62,32 @@ app.listen(port, function() {
   console.log('Listening on port',port);
 });
 
+function initWords() {
+  return shuffleArray(readWords).slice(0);
+}
+
+function initImages() {
+  return shuffleArray(fs.readdirSync(imgPath));
+}
+
+function getWord() {
+  if (wordArray.length === 0) {
+    wordArray = initWords();
+  }
+  return capFirst(wordArray.pop());
+}
+
+function getImg() {
+  if (imgArray.length === 0) {
+    imgArray = initImages();
+  }
+  return imgArray.pop();
+}
+
 function capFirst(str) {
-  var words = str.split(' ');
-  words = words.map(function(s) { return s.charAt(0).toUpperCase() + s.slice(1) });
-  return words.join(' ');
+  return str.split(' ')
+    .map(function(s) { return s.charAt(0).toUpperCase() + s.slice(1) })
+    .join(' ');
 }
 
 function shuffleArray(arr) {
@@ -72,4 +98,12 @@ function shuffleArray(arr) {
         arr[j] = temp;
     }
     return arr;
+}
+
+function getGreeting() {
+  return capFirst(greetings[Math.floor(Math.random()*greetings.length)]);
+}
+
+function getGoodbye() {
+  return capFirst(goodbye[Math.floor(Math.random()*goodbye.length)]);
 }
