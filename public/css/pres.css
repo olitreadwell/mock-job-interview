@@ -10,3 +10,18 @@ section.pres-lg img {
 a.restart {
   font-size: 5vh;
 }
+
+.footy {
+  width: 98%;
+  padding: 10px;
+  font-size: 14px;
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  text-align: center;
+  position: fixed;
+  bottom: 20px;
+  color: #42affa;
+}
+
+.footy a:link, .footy a:visited {
+  color: #42affa;
+}

@@ -31,11 +31,14 @@ app.disable('x-powered-by');
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-app.get('/pres', function(req, res) {
+app.get('/pres/:size?', function(req, res) {
+  var size = req.params.size;
+  var baseNum = (size==='l')?20:(size==='s')?5:10;
+  var variance = (size==='l')?10:(size==='s')?2:6;
+  var numSlides = baseNum + Math.random()*variance;
 
   var title = getWord();
   var slides = [getGreeting()];
-  var numSlides = 10 + Math.random()*6;
 
   for (var i=0; i<numSlides; i++) {
 
