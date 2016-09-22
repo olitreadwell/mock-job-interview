@@ -44,6 +44,7 @@ app.get('/pres', function(req, res) {
     }
 
     slides.push(capFirst(goodbye.pop()));
+    slides.push('<a class="restart" href="/pres">New Randomized Presentation</a>');
     res.render('deck', {slides: slides, title: title});
   });
 });
