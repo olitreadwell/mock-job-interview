@@ -31,8 +31,8 @@ const params = {
 
 app.get('/pres/:size?', (req, res) => {
   const size = req.params.size;
-  const baseNum = params[size].size || params.default.size;
-  const variance = params[size].variance || params.default.variance;
+  const baseNum = size in params ? params[size].size : params.default.size;
+  const variance = size in params ? params[size].variance : params.default.variance;
   const numSlides = baseNum + (Math.random() * variance);
 
   const title = lib.getWord();

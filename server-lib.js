@@ -28,16 +28,21 @@ const greetings = shuffleArray([
 const goodbye = shuffleArray([
   'goodbye', 'the end', 'fin', 'thank you', 'thanks', 'thank you.'
 ]);
+
 const lib = {
-  getGreeting: () => this.capFirst(greetings[Math.floor(Math.random() * greetings.length)]),
-  getGoodbye: () => this.capFirst(goodbye[Math.floor(Math.random() * goodbye.length)]),
-  getImg: () => {
+  getGreeting() {
+    return this.capFirst(greetings[Math.floor(Math.random() * greetings.length)])
+  },
+  getGoodbye() {
+    return this.capFirst(goodbye[Math.floor(Math.random() * goodbye.length)])
+  },
+  getImg() {
     if (imgArray.length === 0) {
       imgArray = this.initImages();
     }
     return imgArray.pop();
   },
-  getWord: () => {
+  getWord() {
     if (wordArray.length === 0) {
       wordArray = this.initWords();
     }
