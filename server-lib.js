@@ -31,10 +31,10 @@ const goodbye = shuffleArray([
 
 const lib = {
   getGreeting() {
-    return this.capFirst(greetings[Math.floor(Math.random() * greetings.length)])
+    return this.capFirst(greetings[Math.floor(Math.random() * greetings.length)]);
   },
   getGoodbye() {
-    return this.capFirst(goodbye[Math.floor(Math.random() * goodbye.length)])
+    return this.capFirst(goodbye[Math.floor(Math.random() * goodbye.length)]);
   },
   getImg() {
     if (imgArray.length === 0) {
