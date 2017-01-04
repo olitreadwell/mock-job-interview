@@ -3,7 +3,6 @@
 /* eslint-env node */
 /* eslint no-magic-numbers: off */
 /* eslint no-console: off */
-/* eslint no-nested-ternary: off */
 
 const express = require('express');
 const app = express();
@@ -15,10 +14,25 @@ app.disable('x-powered-by');
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+const params = {
+  l: {
+    size: 20,
+    variance: 10
+  },
+  s: {
+    size: 5,
+    variance: 2
+  },
+  default: {
+    size: 10,
+    variance: 6
+  }
+};
+
 app.get('/pres/:size?', (req, res) => {
   const size = req.params.size;
-  const baseNum = (size === 'l') ? 20 : (size === 's') ? 5 : 10;
-  const variance = (size === 'l') ? 10 : (size === 's') ? 2 : 6;
+  const baseNum = params[size].size || params.default.size;
+  const variance = params[size].variance || params.default.variance;
   const numSlides = baseNum + (Math.random() * variance);
 
   const title = lib.getWord();

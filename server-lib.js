@@ -7,8 +7,9 @@ const fs = require('fs');
 
 const wordPath = path.join(__dirname, 'data/words.txt');
 const imgPath = path.join(__dirname, 'public/img');
-let readWords = [];
-let wordArray = [];
+let readWords;
+let wordArray;
+let imgArray;
 
 function shuffleArray(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -20,15 +21,16 @@ function shuffleArray(arr) {
   return arr;
 }
 
+const greetings = shuffleArray([
+  'hello', 'welcome', 'hi', 'hello', 'welcome', 'question:'
+]);
+
+const goodbye = shuffleArray([
+  'goodbye', 'the end', 'fin', 'thank you', 'thanks', 'thank you.'
+]);
 const lib = {
-  greetings: shuffleArray([
-    'hello', 'welcome', 'hi', 'hello', 'welcome', 'question:'
-  ]),
-  goodbye: shuffleArray([
-    'goodbye', 'the end', 'fin', 'thank you', 'thanks', 'thank you.'
-  ]),
-  getGreeting: () => this.capFirst(this.greetings[Math.floor(Math.random() * this.greetings.length)]),
-  getGoodbye: () => this.capFirst(this.goodbye[Math.floor(Math.random() * this.goodbye.length)]),
+  getGreeting: () => this.capFirst(greetings[Math.floor(Math.random() * greetings.length)]),
+  getGoodbye: () => this.capFirst(goodbye[Math.floor(Math.random() * goodbye.length)]),
   getImg: () => {
     if (imgArray.length === 0) {
       imgArray = this.initImages();
@@ -59,6 +61,6 @@ fs.readFile(wordPath, 'utf8', (err, wordTxt) => {
   }
 });
 
-let imgArray = lib.initImages();
+imgArray = lib.initImages();
 
 module.exports = lib;
