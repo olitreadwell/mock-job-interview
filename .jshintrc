@@ -1,5 +1,6 @@
 {
-  "globals": {
+  "globals":
+  {
     "angular": false,
     "paper": false
   },

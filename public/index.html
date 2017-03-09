@@ -1,37 +1,58 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<title>Presentation</title>
-		<link rel="stylesheet" href="/css/reveal.css">
-		<link rel="stylesheet" href="/css/theme/black.css">
-		<link rel="stylesheet" href="/css/pres.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides" id="deck">
-				<section><a href="/pres">Begin.</a></section>
-			</div>
-		</div>
 
-		<div class="footy">
-			<a href="/pres/s">shorter</a> | <a href="/pres/l">longer</a> | <a href="/pres/⚡">lightning</a>
-		</div>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Presentation</title>
+    <link rel="stylesheet" href="/css/reveal.css">
+    <link rel="stylesheet" href="/css/theme/black.css">
+    <link rel="stylesheet" href="/css/pres.css">
+  </head>
 
-		<script src="/lib/js/head.min.js"></script>
-		<script src="/js/reveal.js"></script>
+  <body>
+    <div class="reveal">
+      <div class="slides" id="deck">
+        <section>
+          <a href="/pres">Begin.</a>
+          <div>Please start a screen recording with Audio before pressing Begin.</div>
+        </section>
+      </div>
+    </div>
 
-		<script>
-			Reveal.initialize({
-				history: true,
-				dependencies: [
-					{ src: '/plugin/markdown/marked.js' },
-					{ src: '/plugin/markdown/markdown.js' },
-					{ src: '/plugin/notes/notes.js', async: true },
-					{ src: '/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+    <div class="footy">
+      <a href="/pres/s">shorter</a> | <a href="/pres/l">longer</a> | <a href="/pres/⚡">lightning</a>
+    </div>
+
+    <script src="/lib/js/head.min.js"></script>
+    <script src="/js/reveal.js"></script>
+
+    <script>
+      Reveal.initialize(
+      {
+        history: true,
+        dependencies: [
+        {
+          src: '/plugin/markdown/marked.js'
+        },
+        {
+          src: '/plugin/markdown/markdown.js'
+        },
+        {
+          src: '/plugin/notes/notes.js',
+          async: true
+        },
+        {
+          src: '/plugin/highlight/highlight.js',
+          async: true,
+          callback: function()
+          {
+            hljs.initHighlightingOnLoad();
+          }
+        }]
+      });
+
+    </script>
+  </body>
+
 </html>

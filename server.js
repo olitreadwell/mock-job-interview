@@ -15,60 +15,64 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 const params = {
-  l: {
+  l:
+  {
     size: 20,
     variance: 10,
-    auto: 0
+    auto: 15000
   },
-  s: {
+  s:
+  {
     size: 5,
     variance: 2,
-    auto: 0
+    auto: 15000
   },
-  '⚡': {
+  '⚡':
+  {
     size: 20,
     variance: 0,
     auto: 15000
   },
-  default: {
+  default:
+  {
     size: 10,
     variance: 6,
-    auto: 0
+    auto: 15000
   }
 };
 
-app.get('/pres/:size?', (req, res) => {
+app.get('/pres/:size?', (req, res) =>
+{
   const size = req.params.size;
   const baseNum = size in params ? params[size].size : params.default.size;
   const variance = size in params ? params[size].variance : params.default.variance;
   const autoslide = size in params ? params[size].auto : 0;
   const numSlides = baseNum + (Math.random() * variance);
 
-  const title = lib.getWord();
-  const slides = [size === '⚡' ? lib.getWord() : lib.getGreeting()];
+  const title = "Mock Interview"
+  const slides = [lib.getWord()];
 
-  for (let i = 0; i < numSlides; i++) {
-    if (Math.random() < 0.3) {
-      slides.push(lib.getWord());
-    }
-    else {
-      slides.push(`<img src="/img/${lib.getImg()}">`);
-    }
+  for (let i = 0; i < numSlides; i++)
+  {
+    slides.push(lib.getWord());
   }
 
   slides.push(lib.getGoodbye());
-  slides.push('<a class="restart" href="/pres">New Randomized Presentation</a>');
-  res.render('deck', {
+  slides.push('<a class="restart" href="/pres">New Mock Interview</a>');
+  res.render('deck',
+  {
     slides,
     title,
     autoslide
   });
 });
 
-app.use((req, res) => {
+app.use((req, res) =>
+{
   res.sendStatus(404);
 });
 
-app.listen(port, () => {
+app.listen(port, () =>
+{
   console.log('Listening on port', port);
 });
