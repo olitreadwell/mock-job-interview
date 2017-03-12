@@ -79,7 +79,7 @@
       center: true,
 
       // Enables touch navigation on devices with touch input
-      touch: true,
+      touch: false,
 
       // Loop the presentation
       loop: false,
@@ -102,7 +102,7 @@
       help: true,
 
       // Flags if it should be possible to pause the presentation (blackout)
-      pause: true,
+      pause: false,
 
       // Flags if speaker notes should be visible to all viewers
       showNotes: false,
@@ -110,7 +110,7 @@
       // Number of milliseconds between automatically proceeding to the
       // next slide, disabled when set to 0, this value can be overwritten
       // by using a data-autoslide attribute on your slides
-      autoSlide: 3000,
+      autoSlide: 0,
 
       // Stop auto-sliding after user input
       autoSlideStoppable: false,

@@ -30,11 +30,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/olitreadwell/mock-interviews.git"
+    "url": "git+https://github.com/olitreadwell/mock-job-interview.git"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/olitreadwell/mock-interviews/issues"
+    "url": "https://github.com/olitreadwell/mock-job-interview/issues"
   },
-  "homepage": "https://github.com/olitreadwell/mock-interviews#readme"
+  "homepage": "https://github.com/olitreadwell/mock-job-interview#readme"
 }

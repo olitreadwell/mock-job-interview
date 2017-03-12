@@ -5,7 +5,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const wordPath = path.join(__dirname, 'data/words.txt');
+const wordPath = path.join(__dirname, 'data/questions.txt');
 let readWords;
 let wordArray;
 
